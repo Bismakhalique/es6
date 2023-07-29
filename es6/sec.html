@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+<!-- //////////DEFAULT, REST & SPREAD -->
+  <!--- QUESTION#1  -->
+
+  <label for="num1">Enter number 1:</label>
+  <input type="number" id="num1" value="0">
+  <br>
+  <label for="num2">Enter number 2:</label>
+  <input type="number" id="num2" value="0">
+  <br>
+  <button onclick="calculateSum()">Calculate Sum</button>
+  <p>Result: <span id="result">-</span></p>
+   <script>
+
+const sumNumbers = (num1 = 0, num2 = 0) => num1 + num2;
+
+    function calculateSum() {
+      const num1 = parseFloat(document.getElementById('num1').value);
+      const num2 = parseFloat(document.getElementById('num2').value);
+      const result = sumNumbers(num1, num2);
+      document.getElementById('result').textContent = result;
+    }
+  </script>
+
+    <!--- QUESTION#2  -->
+          <button onclick="displayArguments()">Get Arguments</button>
+          <p>Result: <span id="result">-</span></p>
+        
+          <script>
+            // ES6 version with rest parameters
+            function getArguments(...args) {
+              return args;
+            }
+        
+            function displayArguments() {
+              const argumentsArray = getArguments(1, 'hello', true, [1, 2, 3]);
+              document.getElementById('result').textContent = JSON.stringify(argumentsArray);
+            }
+          </script>
+
+
+    <!--- QUESTION#3  -->
+    <label for="numberInput">Enter a number:</label>
+  <input type="number" id="numberInput">
+  <button onclick="calculate()">Calculate</button>
+  <p>Result: <span id="result">-</span></p>
+
+  <script>
+    function calculate() {
+      const userInput = document.getElementById('numberInput').value;
+
+      const numberValue = parseFloat(userInput);
+      document.getElementById('result').textContent = numberValue;
+    }
+  </script>
+
+        <!-- QUESTION#4 -->
+        <label for="array1Input">Enter array 1 (comma-separated):</label>
+        <input type="text" id="array1Input">
+        <br>
+        <label for="array2Input">Enter array 2 (comma-separated):</label>
+        <input type="text" id="array2Input">
+        <br>
+        <button onclick="concatenateArrays()">Concatenate Arrays</button>
+        <p>Result: <span id="result">-</span></p>
+      
+        <script>
+          function concatenateArrays() {
+            const array1 = document.getElementById('array1Input').value.split(',').map(item => parseFloat(item.trim()));
+            const array2 = document.getElementById('array2Input').value.split(',').map(item => parseFloat(item.trim()));
+      
+            if (array1.some(isNaN) || array2.some(isNaN)) {
+              document.getElementById('result').textContent = "Invalid input, please enter valid arrays of numbers.";
+            } else {
+              const resultArray = [...array1, ...array2];
+              document.getElementById('result').textContent = resultArray.toString();
+            }
+          }
+          </script>
+
+
+      <!-- QUESTION#5 -->
+<form onsubmit="processInput(event)">
+  <label for="nameInput">Name:</label>
+  <input type="text" id="nameInput" required>
+  <br>
+  <label for="ageInput">Age:</label>
+  <input type="number" id="ageInput" required>
+  <br>
+  <label for="occupationInput">Occupation:</label>
+  <input type="text" id="occupationInput" required>
+  <br>
+  <button type="submit">Submit</button>
+</form>
+<p>Result:</p>
+<pre id="result"></pre>
+
+<script>
+  function addIdToObject(person) {
+    const id = generateUniqueId(); 
+    return { ...person, id };
+  }
+
+  function generateUniqueId() {
+    return Math.random().toString(36).substr(2, 9);
+  }
+
+  function processInput(event) {
+    event.preventDefault();
+
+    const name = document.getElementById('nameInput').value;
+    const age = parseInt(document.getElementById('ageInput').value);
+    const occupation = document.getElementById('occupationInput').value;
+
+    const inputObject = { name, age, occupation };
+    const resultObject = addIdToObject(inputObject);
+
+    document.getElementById('result').textContent = JSON.stringify(resultObject, null, 2);
+  }
+</script>
+
+
+
+<!-- ARROW FUNCTION -->
+    <!-- QUESTION#1 -->
+    <script>
+      const numbers = [1, 2, 3, 4, 5];
+      
+      console.log("Using Arrow Function and forEach():");
+      numbers.forEach((element) => {
+        console.log(element * 2);
+      });
+      const doubledNumbers = numbers.map((element) => element * 2);
+      
+      console.log("\nUsing Arrow Function and map():");
+      console.log(doubledNumbers);
+      </script>
+      
+          <!-- QUESTION#2 -->
+          <form onsubmit="calculateLength(event)">
+              <label for="stringInput">Enter a string:</label>
+              <input type="text" id="stringInput" required>
+              <button type="submit">Calculate Length</button>
+            </form>
+            <p>Length of the string: <span id="result">-</span></p>
+          
+            <script>
+              const getStringLength = (str) => str.length;
+          
+              function calculateLength(event) {
+                event.preventDefault();
+          
+                const inputString = document.getElementById('stringInput').value;
+                const length = getStringLength(inputString);
+          
+                document.getElementById('result').textContent = length;
+              }
+            </script>
+          <!-- QUESTION#3 -->
+          <form onsubmit="multiplyNumbers(event)">
+              <label for="number1Input">Enter the first number:</label>
+              <input type="number" id="number1Input" required>
+              <br>
+              <label for="number2Input">Enter the second number:</label>
+              <input type="number" id="number2Input" required>
+              <br>
+              <button type="submit">Calculate Product</button>
+            </form>
+            <p>Product: <span id="prdct">-</span></p>
+          
+            <script>
+              const multiply = (num1, num2) => num1 * num2;
+          
+              function multiplyNumbers(event) {
+                event.preventDefault();
+          
+                const num1 = parseFloat(document.getElementById('number1Input').value);
+                const num2 = parseFloat(document.getElementById('number2Input').value);
+          
+                const product = multiply(num1, num2);
+          
+                document.getElementById('prdct').textContent = product;
+              }
+            </script>
+          <!-- QUESTION#4 -->
+          <label for="numbersInput">Enter numbers (comma-separated):</label>
+        <br>
+        <input type="text" id="numbersInput" oninput="calculateAverage()">
+        <br>
+        <p>Average: <span id="avg">-</span></p>
+      
+        <script>
+          const calculateAverage = () => {
+            const numbersInput = document.getElementById('numbersInput').value;
+            const average = calculateAverageFromString(numbersInput);
+      
+            document.getElementById('avg').textContent = average;
+          };
+      
+          const calculateAverageFromString = (numbers) => {
+            const numberArray = numbers.split(',').map(num => parseFloat(num.trim()));
+            if (numberArray.length === 0 || numberArray.some(isNaN)) return 0;
+            const sum = numberArray.reduce((total, num) => total + num, 0);
+            return sum / numberArray.length;
+          };
+          </script>
+          <!-- QUESTION#5 -->
+          <label for="name-input">Enter your name:</label>
+        <input type="text" id="name-input">
+        <button id="greet-button">Greet</button>
+        <div id="greeting-container"></div>
+      
+        <script type="module">
+          const greet = (name) => {
+            return `Hello, ${name}!`;
+          };
+          const greetButton = document.getElementById('greet-button');
+          greetButton.addEventListener('click', () => {
+            const nameInput = document.getElementById('name-input');
+            const name = nameInput.value.trim();
+      
+            if (name) {
+              const greeting = greet(name);
+              const greetingContainer = document.getElementById('greeting-container');
+              greetingContainer.innerHTML = `<p>${greeting}</p>`;
+            } else {
+              alert("Please enter a valid name.");
+            }
+          });
+        </script>
+          <!-- QUESTION#6 -->
+          <h1>Random Number Generator</h1>
+          <button id="generate-button">Generate Random Number</button>
+          <p id="random-number"></p>
+        
+          <script>
+            const getRandomNumber = () => Math.random();
+        
+            const generateButton = document.getElementById('generate-button');
+            const randomNumberDisplay = document.getElementById('random-number');
+        
+            generateButton.addEventListener('click', () => {
+              const randomNumber = getRandomNumber();
+              randomNumberDisplay.textContent = `Random Number: ${randomNumber}`;
+            });
+          </script>
+      
+
+
+    <!-- PROMISES -->
+        <!-- QUESTION#1 -->
+        <h1>Square After Delay</h1>
+  <label for="number-input">Enter a number:</label>
+  <input type="number" id="number-input">
+  <button id="calculate-button">Calculate Square</button>
+  <p id="sqr"></p>
+
+  <script type="module">
+    function squareAfterDelay(number) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          if (typeof number === 'number') {
+            const square = number * number;
+            resolve(square);
+          } else {
+            reject(new Error('Invalid input: The parameter must be a number.'));
+          }
+        }, 1000); 
+      });
+    }
+
+    const calculateButton = document.getElementById('calculate-button');
+    const resultElement = document.getElementById('sqr');
+
+    calculateButton.addEventListener('click', () => {
+      const numberInput = document.getElementById('number-input').value;
+      const number = parseFloat(numberInput);
+
+      squareAfterDelay(number)
+        .then((result) => {
+          resultElement.textContent = `The square of ${number} is: ${result}`;
+        })
+        .catch((error) => {
+          resultElement.textContent = error.message;
+        });
+    });
+  </script>
+         <!-- QUESTION#2 -->
+         <label for="promises">Enter promises (comma-separated): </label>
+    <input type="text" id="promises">
+    <button onclick="resolveUserPromises()">Resolve Promises</button>
+  </div>
+  <div id="results"></div>
+
+  <script>
+    function resolvePromises(promisesArray) {
+      return Promise.all(promisesArray);
+    }
+    function resolveUserPromises() {
+      const inputElement = document.getElementById("promises");
+      const userInput = inputElement.value.trim();
+
+      if (userInput.length === 0) {
+        alert("Please enter promises separated by commas.");
+        return;
+      }
+
+      const userPromises = userInput.split(",").map(p => new Promise(resolve => resolve(p.trim())));
+
+      resolvePromises(userPromises)
+        .then((results) => {
+          const resultsDiv = document.getElementById("results");
+          resultsDiv.innerHTML = `<p>Resolved Values: ${JSON.stringify(results)}</p>`;
+        })
+        .catch((error) => {
+          const resultsDiv = document.getElementById("results");
+          resultsDiv.innerHTML = `<p>Error occurred: ${error}</p>`;
+        });
+    }
+  </script>
+         <!-- QUESTION#3 -->
+         <div>
+          <label for="urlInput">Enter URL: </label>
+          <input type="text" id="urlInput">
+          <button onclick="fetchAndParseJSON()">Fetch Data</button>
+        </div>
+        <div id="results"></div>
+      
+        <!-- <script>
+          function fetchAndParseJSON(url) {
+  return fetch(url)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`Network response was not ok: ${response.status} - ${response.statusText}`);
+      }
+      return response.json();
+    });
+}
+// const url = 'https://api.example.com/data'; 
+
+// fetchAndParseJSON(url)
+//   .then((data) => {
+//     console.log(data); 
+//   })
+//   .catch((error) => {
+//     console.error('Error fetching or parsing data:', error);
+//   });
+
+        </script> -->
+         <!-- QUESTION#4 -->
+         <body>
+          <h1>Sum of Promises Example</h1>
+          <div>
+            <label for="value1">Enter Value 1: </label>
+            <input type="number" id="value1">
+            <br>
+            <label for="value2">Enter Value 2: </label>
+            <input type="number" id="value2">
+            <br>
+            <button onclick="calculateSum()">Calculate Sum</button>
+          </div>
+          <div id="result"></div>
+        
+          <script>
+            function sumOfResolvedValues(promise1, promise2) {
+              return Promise.all([promise1, promise2])
+                .then((results) => {
+                  const [value1, value2] = results;
+                  return value1 + value2;
+                });
+            }
+        
+            function calculateSum() {
+              const value1 = parseFloat(document.getElementById("value1").value);
+              const value2 = parseFloat(document.getElementById("value2").value);
+        
+              if (isNaN(value1) || isNaN(value2)) {
+                alert("Please enter valid numbers.");
+                return;
+              }
+        
+              const promise1 = Promise.resolve(value1);
+              const promise2 = Promise.resolve(value2);
+        
+              sumOfResolvedValues(promise1, promise2)
+                .then((sum) => {
+                  const resultDiv = document.getElementById("result");
+                  resultDiv.innerHTML = `<p>Sum: ${sum}</p>`;
+                })
+                .catch((error) => {
+                  console.error(error);
+                });
+            }
+          </script>
+         <!-- QUESTION#5 -->
+         <h1>Promise Timeout Example</h1>
+  <div>
+    <label for="timeoutInput">Enter Timeout (in milliseconds): </label>
+    <input type="number" id="timeoutInput" min="0" value="2000">
+    <button onclick="runPromiseWithTimeout()">Run Promise</button>
+  </div>
+  <div id="prmtimeout"></div>
+
+  <script>
+    function promiseWithTimeout(originalPromise, timeout) {
+      const timeoutPromise = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          reject(new Error("Promise timed out"));
+        }, timeout);
+      });
+
+      return Promise.race([originalPromise, timeoutPromise]);
+    }
+
+    function runPromiseWithTimeout() {
+      const timeoutInput = parseInt(document.getElementById("timeoutInput").value, 10);
+
+      if (isNaN(timeoutInput) || timeoutInput <= 0) {
+        alert("Please enter a valid positive timeout value (in milliseconds).");
+        return;
+      }
+
+      const promise = new Promise((resolve) => setTimeout(() => resolve("Promise resolved"), 2000));
+
+      promiseWithTimeout(promise, timeoutInput)
+        .then((result) => {
+          const resultDiv = document.getElementById("result");
+          resultDiv.innerHTML = `<p>Result: ${result}</p>`;
+        })
+        .catch((error) => {
+          const resultDiv = document.getElementById("prmtimeout");
+          resultDiv.innerHTML = `<p>Error: ${error.message}</p>`;
+        });
+    }
+  </script>
+         <!-- QUESTION#6 -->
+         <h1>Counter with Promises</h1>
+  <div id="output"></div>
+
+  <script>
+    const startCountingPromise = new Promise((resolve) => {
+      resolve("Start Counting");
+    });
+    function counter(value) {
+      const outputDiv = document.getElementById("output");
+      outputDiv.innerHTML += `<p>${value}</p>`;
+    }
+
+    startCountingPromise
+      .then((result) => {
+        counter(result); 
+        return 1;
+      })
+      .then((value) => {
+        counter(value); 
+        return value + 1;
+      })
+      .then((value) => {
+        counter(value); 
+        return value + 1;
+      })
+      .then((value) => {
+        counter(value); 
+      });
+  </script>
+
+</body>
+</html>
